@@ -3,7 +3,12 @@ import './App.css';
 import Navbarr from './components/Navbarr';
 import { useState } from 'react';
 import MoviesList from './components/MoviesList';
-import Swiper from 'swiper';
+import Footer from './components/Footer';
+import { Route, Routes } from 'react-router-dom';
+import Contact from './components/Contact';
+import About from './components/Carousell';
+import Trailer from './components/Trailer';
+import Carousell from './components/Carousell';
 
 function App() {
   const [movies, setmovies] = useState ([
@@ -106,11 +111,18 @@ function App() {
       rating: 2,
   },
   {
-    img:'https://hips.hearstapps.com/hmg-prod/images/aladdin-1532612274.jpg?resize=480:*',
+    img:'https://wwwimage-us.pplusstatic.com/thumbnails/photos/w370-q80/movie_asset/89/76/86/ppm_salone_poster_1400x2100.jpg',
     name:'Aladin',
     description:
     "As civil war rages in Africa, a fierce warlord (Idris Elba) trains a young orphan (Abraham Attah) to join his group of guerrilla soldiers.",
   rating: 5,
+},
+{
+  img:'https://i.ytimg.com/vi/6e4rLkENqHM/maxresdefault.jpg',
+  name:'Aladin',
+  description:
+  "As civil war rages in Africa, a fierce warlord (Idris Elba) trains a young orphan (Abraham Attah) to join his group of guerrilla soldiers.",
+rating: 5,
 },
   ])
 
@@ -120,7 +132,16 @@ function App() {
   return (
     <div>
       <Navbarr settext={settext} setrate={setrate}/>
-      <MoviesList movies={movies} setmovies={setmovies} text={text} rate={rate}/>
+      <Carousell/>
+      <Routes>
+        <Route path="/" element={<MoviesList movies={movies} setmovies={setmovies} text={text} rate={rate} />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/trailer/:name" element={<Trailer movies={movies} />} />
+      </Routes>
+      
+      
+      <Footer/>
     </div>
   );
 }
